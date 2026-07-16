@@ -17,3 +17,6 @@ vendor
 # local dev artifacts
 .playwright-mcp/
 amor_page.png
+
+# AMOR project page (kept local; publish later)
+AMOR/
