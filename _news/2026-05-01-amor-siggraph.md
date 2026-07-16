@@ -1,0 +1,8 @@
+---
+layout: post
+date: 2026-05-01
+inline: true
+related_posts: false
+---
+
+Our first paper *AMOR* has been accepted to **SIGGRAPH 2026 !**
