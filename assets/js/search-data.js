@@ -387,8 +387,8 @@ ninja.data = [{
             },},{id: "news-honored-to-receive-the-ai-seoul-tech-graduate-scholarship-for-phd-students",
           title: 'Honored to receive the AI Seoul Tech Graduate Scholarship for PhD students.',
           description: "",
-          section: "News",},{id: "news-our-first-paper-amor-has-been-accepted-to-siggraph-2026",
-          title: 'Our first paper AMOR has been accepted to SIGGRAPH 2026 !',
+          section: "News",},{id: "news-my-first-paper-amor-has-been-accepted-to-siggraph-2026",
+          title: 'My first paper AMOR has been accepted to SIGGRAPH 2026 !',
           description: "",
           section: "News",},{id: "projects-project-1",
           title: 'project 1',
@@ -467,11 +467,11 @@ ninja.data = [{
           window.open("https://github.com/chkim1011", "_blank");
         },
       },{
-        id: 'social-custom_social',
-        title: 'Custom_social',
+        id: 'social-scholar',
+        title: 'Google Scholar',
         section: 'Socials',
         handler: () => {
-          window.open("https://scholar.google.com/scholar?q=Chanha+Kim", "_blank");
+          window.open("https://scholar.google.com/citations?user=Ztqqp3MAAAAJ", "_blank");
         },
       },{
       id: 'light-theme',
