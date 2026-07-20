@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Our first paper *AMOR* has been accepted to **SIGGRAPH 2026 !**
+My first paper [*AMOR*](/AMOR/) has been accepted to **SIGGRAPH 2026 !**

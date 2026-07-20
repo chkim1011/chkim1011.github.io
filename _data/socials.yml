@@ -4,12 +4,8 @@
 email: chanha@imo.snu.ac.kr
 orcid_id: 0009-0005-8269-3086
 github_username: chkim1011
-# scholar_userid:  # uncomment and add your Google Scholar ID once you have a profile
+scholar_userid: Ztqqp3MAAAAJ
 # linkedin_username:
 # twitter_username:
 # youtube_id:
 # cv_pdf: /assets/pdf/cv.pdf  # uncomment once you add a CV PDF
-custom_social: # Google Scholar (temporary search link until profile exists)
-  logo: ai ai-google-scholar
-  title: Google Scholar
-  url: https://scholar.google.com/scholar?q=Chanha+Kim
