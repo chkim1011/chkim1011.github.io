@@ -115,9 +115,34 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.12);
     }
     .cmp figcaption { display: none; }
+    .cmp video { cursor: zoom-in; }
     @media (max-width: 768px) {
       .cmp { flex-direction: column; gap: 1rem; }   /* stack on mobile */
     }
+    /* Lightbox for result videos */
+    .rt-modal {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+      align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+    .rt-modal.is-open { display: flex; }
+    .rt-modal-video {
+      max-width: 95vw; max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      background: #000;
+    }
+    .rt-modal-close {
+      position: absolute; top: 1rem; right: 1.5rem;
+      background: transparent; border: none;
+      color: #fff; font-size: 2.5rem; line-height: 1;
+      cursor: pointer; padding: 0.25rem 0.75rem;
+      transition: opacity 0.2s;
+    }
+    .rt-modal-close:hover { opacity: 0.7; }
     .rc-btn {
       position: absolute;
       top: 50%;
@@ -352,6 +377,43 @@
         document.querySelector('.rc-prev').addEventListener('click', () => { idx--; render(); });
         document.querySelector('.rc-next').addEventListener('click', () => { idx++; render(); });
         render();
+      })();
+    </script>
+
+    <script>
+      // Click-to-enlarge lightbox for result videos
+      (function () {
+        const modal = document.createElement('div');
+        modal.className = 'rt-modal';
+        modal.innerHTML =
+          '<button class="rt-modal-close" aria-label="Close">&times;</button>' +
+          '<video class="rt-modal-video" controls autoplay loop muted playsinline></video>';
+        document.body.appendChild(modal);
+        const modalVideo = modal.querySelector('.rt-modal-video');
+        const closeBtn = modal.querySelector('.rt-modal-close');
+
+        function open(src) {
+          modalVideo.src = src;
+          modal.classList.add('is-open');
+          modalVideo.play().catch(() => {});
+        }
+        function close() {
+          modal.classList.remove('is-open');
+          modalVideo.pause();
+          modalVideo.removeAttribute('src');
+          modalVideo.load();
+        }
+        document.querySelectorAll('.cmp video').forEach(v => {
+          v.addEventListener('click', () => {
+            const src = v.querySelector('source') ? v.querySelector('source').src : v.src;
+            open(src);
+          });
+        });
+        modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+        closeBtn.addEventListener('click', close);
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+        });
       })();
     </script>
   </section>
