@@ -26,10 +26,10 @@
         <style>
           .navbar-brand.social a.email-display {
             position: relative;
-            cursor: default;
+            cursor: pointer;
           }
           .navbar-brand.social a.email-display::after {
-            content: attr(data-email);
+            content: attr(data-tip);
             position: absolute;
             top: calc(100% + 6px);
             left: 50%;
@@ -46,18 +46,43 @@
             transition: opacity 0.15s;
             z-index: 1000;
           }
-          .navbar-brand.social a.email-display:hover::after {
+          .navbar-brand.social a.email-display:hover::after,
+          .navbar-brand.social a.email-display.is-copied::after {
             opacity: 1;
           }
         </style>
         <script>
-          // Show the email address on hover instead of opening a mail client
+          // Hover shows address; click copies to clipboard with "Copied!" feedback
           document.querySelectorAll('.navbar-brand.social a[href^="mailto:"]').forEach(function (a) {
             var addr = a.getAttribute('href').replace(/^mailto:/, '');
             a.setAttribute('data-email', addr);
+            a.setAttribute('data-tip', addr);
             a.removeAttribute('href');
             a.removeAttribute('title');
             a.classList.add('email-display');
+            a.addEventListener('click', function (e) {
+              e.preventDefault();
+              var text = a.getAttribute('data-email');
+              var showCopied = function () {
+                a.setAttribute('data-tip', 'Copied!');
+                a.classList.add('is-copied');
+                setTimeout(function () {
+                  a.classList.remove('is-copied');
+                  a.setAttribute('data-tip', text);
+                }, 1200);
+              };
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(showCopied, showCopied);
+              } else {
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); } catch (_) {}
+                document.body.removeChild(ta);
+                showCopied();
+              }
+            });
           });
         </script>
       {% endif %}
