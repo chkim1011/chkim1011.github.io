@@ -23,6 +23,15 @@
       {% elsif site.enable_navbar_social %}
         <!-- Social Icons -->
         <div class="navbar-brand social">{% social_links %}</div>
+        <script>
+          // Show the email address on hover instead of opening a mail client
+          document.querySelectorAll('.navbar-brand.social a[href^="mailto:"]').forEach(function (a) {
+            var addr = a.getAttribute('href').replace(/^mailto:/, '');
+            a.setAttribute('title', addr);
+            a.removeAttribute('href');
+            a.style.cursor = 'default';
+          });
+        </script>
       {% endif %}
       <!-- Navbar Toggle -->
       <button
